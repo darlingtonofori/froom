@@ -1,9 +1,16 @@
+# __init__.py
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from config import Config
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://forum_db_e89m_user:ZyAxYHd3eSU8AHDbjTh591yYAO6hjs4X@dpg-d0hpuae3jp1c73bscca0-a/forum_db_e89m'
-app.config['SECRET_KEY'] = 'your_secret_key_here'
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
-from app import routes
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
+
+    db.init_app(app)
+
+    with app.app_context():
+        from app import routes, models  # Import inside context
+        return app
