@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ thread.title }}</h2>
+<p><strong>Posted:</strong> {{ thread.date_posted }}</p>
+<p>{{ thread.content }}</p>
+
+<hr>
+<h3>Leave a Comment (Coming Soon)</h3>
+<form method="POST">
+    <textarea name="comment" rows="4" cols="50" placeholder="Write your comment here..." disabled></textarea><br><br>
+    <button type="submit" disabled>Post Comment</button>
+</form>
+{% endblock %}
